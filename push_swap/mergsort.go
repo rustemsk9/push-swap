@@ -33,49 +33,42 @@ func initSize2(value valueStack, size sizeStack) { //maybe do drops based on siz
 	fmt.Fprintln(os.Stderr, "+++++++++++++++++++++++++++++")
 
 }
-
 func insertion(A, B *stack, side bool, Asize, Bsize int) {
-	var p_ func(A, B *stack)
-	var r_ func(A, B *stack)
-	var compare func(A, B *stack) bool
-	var push int
-	var shift int
-	if side == left {
-		p_ = pa
-		r_ = ra
-		push = Bsize
-		shift = Asize
-		compare = func(A, B *stack) bool {
-			if (*A)[0] > (*B)[0] {
-				return true
-			}
-			return false
-		}
-	} else {
-		p_ = pb
-		r_ = rb
-		push = Asize
-		shift = Bsize
-		compare = func(A, B *stack) bool {
-			if (*A)[0] < (*B)[0] {
-				return true
-			}
-			return false
-		}
-	}
-	for push > 0 || shift > 0 {
-		if shift == 0 || push > 0 && len(*A) != 0 && len(*B) != 0 && compare(A, B) {
-			p_(A, B)
-			push--
-			shift++
-		} else {
-			r_(A, B)
-			shift--
-		}
-		if check(A, B) {
-			fmt.Println("CHECK PASSED")
-		}
-	}
+    var p_ func(A, B *stack)
+    var r_ func(A, B *stack)
+    var compare func(A, B *stack) bool
+    var push, shift int
+
+    if side == left {
+        p_ = pa
+        r_ = ra
+        push = Bsize
+        shift = Asize
+        compare = func(A, B *stack) bool { return (*A)[0] > (*B)[0] }
+    } else {
+        p_ = pb
+        r_ = rb
+        push = Asize
+        shift = Bsize
+        compare = func(A, B *stack) bool { return (*A)[0] < (*B)[0] }
+    }
+
+    for push > 0 || shift > 0 {
+        // Only push if it maintains or improves sortedness
+        if shift == 0 || (push > 0 && len(*A) > 0 && len(*B) > 0 && compare(A, B)) {
+            if !A.isSorted() || !B.isSorted() { // Only push if not sorted
+                p_(A, B)
+            }
+            push--
+            shift++
+        } else {
+            // Only rotate if it helps sortedness
+            if !A.isSorted() {
+                r_(A, B)
+            }
+            shift--
+        }
+    }
 }
 
 func updateStacks(size sizeStack, side bool) {
