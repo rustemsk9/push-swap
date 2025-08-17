@@ -194,11 +194,21 @@ func main() {
 	stackB := stack{}
 	// Example: push all A to B using optimal rotations
 	for len(stackA) > 0 {
-		idxA := 0 // always top, or pick better
-		idxB := 0 // always top, or compute best insertion
-
-		p := BestPlan(len(stackA), idxA, len(stackB), idxB)
-		ExecutePlan(&stackA, &stackB, p)
+		bestCost := -1
+		bestIdxA := 0
+		// bestPlan := RotPlan{}
+		for idxA := 0; idxA < len(stackA); idxA++ {
+			idxB := 0 // можно улучшить: искать лучшую позицию для вставки в B
+			p := BestPlan(len(stackA), idxA, len(stackB), idxB)
+			cost := planCost(p)
+			if bestCost == -1 || cost < bestCost {
+				bestCost = cost
+				bestIdxA = idxA
+				// bestPlan = p
+			}
+		}
+		plan := BestPlan(len(stackA), bestIdxA, len(stackB), 0)
+		ExecutePlan(&stackA, &stackB, plan)
 		pb(&stackA, &stackB)
 		MaybeSS(&stackA, &stackB)
 	}
