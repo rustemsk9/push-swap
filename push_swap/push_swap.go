@@ -234,81 +234,81 @@ func rotateBToTop(A, B *stack, idx int) {
 
 // ...existing code...
 
-func main() {
-	// functions := map[string]func(A, B *stack){
-	// 	"sa": sa, "sb": sb, "ss": ss, "pa": pa, "pb": pb, "ra": ra, "rb": rb, "rr": rr, "rra": rra, "rrb": rrb, "rrr": rrr}
+// func main() {
+// 	// functions := map[string]func(A, B *stack){
+// 	// 	"sa": sa, "sb": sb, "ss": ss, "pa": pa, "pb": pb, "ra": ra, "rb": rb, "rr": rr, "rra": rra, "rrb": rrb, "rrr": rrr}
 
-	if len(os.Args) == 1 {
-		os.Exit(2)
-	}
-	stackA := stackFromArgNums(os.Args[1:])
-	stackB := stack{}
+// 	if len(os.Args) == 1 {
+// 		os.Exit(2)
+// 	}
+// 	stackA := stackFromArgNums(os.Args[1:])
+// 	stackB := stack{}
 
-	// 1) Многофазное разбиение A на B по двум пивотам, пока в A не останется <= 3
-	// 1) Многофазное разбиение A на B по двум пивотам, пока в A не останется <= 3
-	for len(stackA) > 3 {
-		p1, p2 := getPivots(stackA)
-		limit := len(stackA) // обрабатываем ровно текущий размер A
-		for processed := 0; processed < limit; processed++ {
-			x := stackA[0]
-			switch {
-			case x < p1:
-				// Малые — отправляем в B.
-				pb(&stackA, &stackB)
-				// Агрегация вращений: если следующий на вершине A — "большой" (>= p2),
-				// то мы бы сделали rb сейчас и ra на следующем шаге. Вместо этого делаем rr.
-				if len(stackA) > 0 && stackA[0] >= p2 {
-					rr(&stackA, &stackB)
-				} else {
-					rb(&stackA, &stackB)
-				}
-			case x < p2:
-				// Средние — просто в B без дополнительных вращений.
-				pb(&stackA, &stackB)
-			default:
-				// Большие — крутим A.
-				ra(&stackA, &stackB)
-			}
-		}
-	}
+// 	// 1) Многофазное разбиение A на B по двум пивотам, пока в A не останется <= 3
+// 	// 1) Многофазное разбиение A на B по двум пивотам, пока в A не останется <= 3
+// 	for len(stackA) > 3 {
+// 		p1, p2 := getPivots(stackA)
+// 		limit := len(stackA) // обрабатываем ровно текущий размер A
+// 		for processed := 0; processed < limit; processed++ {
+// 			x := stackA[0]
+// 			switch {
+// 			case x < p1:
+// 				// Малые — отправляем в B.
+// 				pb(&stackA, &stackB)
+// 				// Агрегация вращений: если следующий на вершине A — "большой" (>= p2),
+// 				// то мы бы сделали rb сейчас и ra на следующем шаге. Вместо этого делаем rr.
+// 				if len(stackA) > 0 && stackA[0] >= p2 {
+// 					rr(&stackA, &stackB)
+// 				} else {
+// 					rb(&stackA, &stackB)
+// 				}
+// 			case x < p2:
+// 				// Средние — просто в B без дополнительных вращений.
+// 				pb(&stackA, &stackB)
+// 			default:
+// 				// Большие — крутим A.
+// 				ra(&stackA, &stackB)
+// 			}
+// 		}
+// 	}
 
-	// 2) Досортировать малый A
-	switch len(stackA) {
-	case 3:
-		three(&stackA, &stackB)
-	case 2:
-		two(&stackA, &stackB)
-	}
+// 	// 2) Досортировать малый A
+// 	switch len(stackA) {
+// 	case 3:
+// 		three(&stackA, &stackB)
+// 	case 2:
+// 		two(&stackA, &stackB)
+// 	}
 
-	// 3) Вернуть из B в A: каждый раз подтягиваем максимум в B на вершину и pa
-	for len(stackB) > 0 {
-		idx := indexOfMax(stackB)
-		rotateBToTop(&stackA, &stackB, idx)
-		pa(&stackA, &stackB)
-	}
+// 	// 3) Вернуть из B в A: каждый раз подтягиваем максимум в B на вершину и pa
+// 	for len(stackB) > 0 {
+// 		idx := indexOfMax(stackB)
+// 		rotateBToTop(&stackA, &stackB, idx)
+// 		pa(&stackA, &stackB)
+// 	}
 
-	// Готово: A по возрастанию, B пуст.
+// 	// Готово: A по возрастанию, B пуст.
 
-	for _, x := range stackA {
-		fmt.Print(int(x), "A ")
-	}
-	fmt.Println()
-	for _, x := range stackB {
-		fmt.Print(int(x), "B ")
-	}
-	return
-	// echo -e "pb\npb\nsb\nrb\npb\nsa\nrb\npb\nrb\npb\nrb\npb" | ./cheker "2 1 3 6 5 8"
-	solve(&stackA, &stackB)
+// 	for _, x := range stackA {
+// 		fmt.Print(int(x), "A ")
+// 	}
+// 	fmt.Println()
+// 	for _, x := range stackB {
+// 		fmt.Print(int(x), "B ")
+// 	}
+// 	// return
+// 	// echo -e "pb\npb\nsb\nrb\npb\nsa\nrb\npb\nrb\npb\nrb\npb" | ./cheker "2 1 3 6 5 8"
+// 	solve(&stackA, &stackB)
 
-	for _, x := range stackA {
-		fmt.Print(int(x), " ")
-	}
-	fmt.Println()
-	for _, x := range stackB {
-		fmt.Print(int(x), " ")
-	}
-	fmt.Println()
-}
+// 	for _, x := range stackA {
+// 		fmt.Print(int(x), " ")
+// 	}
+// 	fmt.Println()
+// 	for _, x := range stackB {
+// 		fmt.Print(int(x), " ")
+// 	}
+// 	fmt.Println()
+// }
 
 func pushAlot(A, B *stack, amount int) {
 	for amount > 0 { // Sorted then the left over? random? // argest set then random?
@@ -330,70 +330,89 @@ const (
 	left  bool = false
 )
 
-
 // // findInsertIdxBDesc возвращает индекс в B, который нужно поднять на верх,
 // // чтобы после pb элемент из A оказался на вершине B и B оставался по убыванию.
 // // Линейная проверка по «круговой» паре prev->curr; если подходящей щели нет,
 // // вставляем после максимума.
-// func findInsertIdxBDesc(b stack, x float64) int {
-//     n := len(b)
-//     if n == 0 {
-//         return 0
-//     }
-//     maxIdx := 0
-//     for i := 1; i < n; i++ {
-//         if b[i] > b[maxIdx] {
-//             maxIdx = i
-//         }
-//     }
-//     // Ищем позицию i, куда x «вписывается» между prev и curr: prev >= x >= curr
-//     for i := 0; i < n; i++ {
-//         prev := b[(i-1+n)%n]
-//         curr := b[i]
-//         if prev >= x && x >= curr {
-//             return i
-//         }
-//     }
-//     // x либо больше max, либо меньше min — вставляем после максимума
-//     return (maxIdx + 1) % n
-// }
+func findInsertIdxBDesc(b stack, x float64) int {
+	n := len(b)
+	if n == 0 {
+		return 0
+	}
+	maxIdx := 0
+	for i := 1; i < n; i++ {
+		if b[i] > b[maxIdx] {
+			maxIdx = i
+		}
+	}
+	// Ищем позицию i, куда x «вписывается» между prev и curr: prev >= x >= curr
+	for i := 0; i < n; i++ {
+		prev := b[(i-1+n)%n]
+		curr := b[i]
+		if prev >= x && x >= curr {
+			return i
+		}
+	}
+	// x либо больше max, либо меньше min — вставляем после максимума
+	return (maxIdx + 1) % n
+}
 
-// func main() {
-//     // functions := map[string]func(A, B *stack){
-//     // 	"sa": sa, "sb": sb, "ss": ss, "pa": pa, "pb": pb, "ra": ra, "rb": rb, "rr": rr, "rra": rra, "rrb": rrb, "rrr": rrr}
+// canSolveSmall checks if a small stack (3 or fewer elements) can be sorted efficiently
+func canSolveSmall(a stack) bool {
+	return len(a) <= 3
+}
 
-//     if len(os.Args) == 1 {
-//         os.Exit(2)
-//     }
-//     stackA := stackFromArgNums(os.Args[1:])
-//     stackB := stack{}
+func main() {
+	if len(os.Args) == 1 {
+		os.Exit(2)
+	}
+	stackA := stackFromArgNums(os.Args[1:])
+	stackB := stack{}
 
-//     // Переносим из A в B, поддерживая B по убыванию.
-//     for len(stackA) > 0 {
-//         bestCost := -1
-//         bestIdxA := 0
-//         bestPlan := RotPlan{}
-//         for idxA := 0; idxA < len(stackA); idxA++ {
-//             x := stackA[idxA]
-//             idxB := findInsertIdxBDesc(stackB, x)
-//             p := BestPlan(len(stackA), idxA, len(stackB), idxB)
-//             cost := planCost(p)
-//             if bestCost == -1 || cost < bestCost {
-//                 bestCost = cost
-//                 bestIdxA = idxA
-//                 bestPlan = p
-//             }
-//         }
-//         // На случай изменения стека: пересчитываем план под выбранные индексы
-//         x := stackA[bestIdxA]
-//         idxB := findInsertIdxBDesc(stackB, x)
-//         plan := BestPlan(len(stackA), bestIdxA, len(stackB), idxB)
-//         ExecutePlan(&stackA, &stackB, plan)
-//         pb(&stackA, &stackB)
-//         MaybeSS(&stackA, &stackB)
-//     }
+	// Special handling for small stacks
+	if len(stackA) <= 3 {
+		solve(&stackA, &stackB)
+		return
+	}
 
-//     // Возвращаем из B в A — теперь A по возрастанию.
-//     for len(stackB) > 0 {
-//         pa(&stackA, &stackB)
-//     }
+	// For the optimal strategy: be more selective about pushes
+	maxPushes := min(len(stackA)/3, 2) // Push at most 2 elements for most cases
+	pushed := 0
+
+	for len(stackA) > 3 && pushed < maxPushes {
+		bestCost := -1
+		bestIdxA := 0
+
+		// Only consider the first few elements for pushing (more selective)
+		maxConsider := min(len(stackA), 4)
+		for idxA := 0; idxA < maxConsider; idxA++ {
+			x := stackA[idxA]
+			idxB := findInsertIdxBDesc(stackB, x)
+			p := BestPlan(len(stackA), idxA, len(stackB), idxB)
+			cost := planCost(p)
+			if bestCost == -1 || cost < bestCost {
+				bestCost = cost
+				bestIdxA = idxA
+			}
+		}
+
+		// Execute the best plan
+		x := stackA[bestIdxA]
+		idxB := findInsertIdxBDesc(stackB, x)
+		plan := BestPlan(len(stackA), bestIdxA, len(stackB), idxB)
+		ExecutePlan(&stackA, &stackB, plan)
+		pb(&stackA, &stackB)
+		pushed++
+
+		// Try to optimize with swaps after each push
+		MaybeSS(&stackA, &stackB)
+	}
+
+	// Solve remaining A (should be mostly sorted now)
+	solve(&stackA, &stackB)
+
+	// Return all elements from B to A
+	for len(stackB) > 0 {
+		pa(&stackA, &stackB)
+	}
+}
