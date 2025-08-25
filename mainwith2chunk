@@ -1,0 +1,66 @@
+func main() {
+	if len(os.Args) == 1 {
+		os.Exit(2)
+	}
+	stackA := stackFromArgNums(os.Args[1:])
+	stackB := stack{}
+
+	inputSize := len(stackA)
+
+	switch {
+	case inputSize <= 3:
+		solve(&stackA, &stackB)
+		return
+
+	case inputSize <= 10:
+		// Your current optimal strategy works well here
+		maxPushes := min(len(stackA)/3, 2)
+		// ... existing optimal logic
+
+	case inputSize <= 100:
+		// Medium-sized inputs: more aggressive pushing
+		maxPushes := len(stackA) / 2
+		maxConsider := min(len(stackA), 10) // Consider more elements
+		// ... modified logic with more pushes
+
+	default:
+		// Large inputs (100+): use chunk-based approach
+		useChunkStrategy(&stackA, &stackB)
+		return
+	}
+
+	// ... rest of current logic
+}
+
+func useChunkStrategy(A, B *stack) {
+	// For very large inputs, use your commented pivot-based approach
+	for len(*A) > 3 {
+		p1, p2 := getPivots(*A)
+		limit := len(*A)
+		for processed := 0; processed < limit; processed++ {
+			x := (*A)[0]
+			switch {
+			case x < p1:
+				pb(A, B)
+				if len(*A) > 0 && (*A)[0] >= p2 {
+					rr(A, B)
+				} else {
+					rb(A, B)
+				}
+			case x < p2:
+				pb(A, B)
+			default:
+				ra(A, B)
+			}
+		}
+	}
+
+	solve(A, B)
+
+	// Return from B to A
+	for len(*B) > 0 {
+		idx := indexOfMax(*B)
+		rotateBToTop(A, B, idx)
+		pa(A, B)
+	}
+}

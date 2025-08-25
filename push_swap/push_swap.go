@@ -408,6 +408,13 @@ func main() {
 		MaybeSS(&stackA, &stackB)
 	}
 
+	if len(stackA) >= 4 && !stackA.isSorted() {
+		// Check if ra would help improve the order
+		if len(stackA) >= 2 && stackA[0] > stackA[1] {
+			// Try ra to see if it improves things
+			ra(&stackA, &stackB)
+		}
+	}
 	// Solve remaining A (should be mostly sorted now)
 	solve(&stackA, &stackB)
 
