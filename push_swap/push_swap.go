@@ -60,6 +60,16 @@ func stackFromArgNums(stackA **stack, argv []string) {
 			appendNode(stackA, num)
 		}
 	}
+	if smallest < 0 {
+		updateIfNeg(smallest, stackA)
+	}
+}
+
+func updateIfNeg(smallest int, stackA **stack) {
+	offset := -smallest
+	for node := *stackA; node != nil; node = node.next {
+		node.val += offset
+	}
 }
 
 func appendNode(s **stack, val int) {
@@ -296,7 +306,7 @@ func return_cheapest(s *stack) *stack {
 	return nil
 }
 
-func rotate_both(a, b **stack, cheapest *stack) {
+func rotate_both(a, b **stack, cheapest *stack) { //
 	for *b != cheapest && *a != cheapest.targetNode {
 		rr(a, b, false)
 	}
@@ -382,14 +392,14 @@ func Push(dest **stack, src **stack) {
 func pa(a **stack, b **stack, checker bool) {
 	Push(a, b)
 	if !checker {
-		print("pa\n")
+		fmt.Print("pa\n")
 	}
 }
 
 func pb(b **stack, a **stack, checker bool) {
 	Push(b, a)
 	if !checker {
-		print("pb\n")
+		fmt.Print("pb\n")
 	}
 }
 

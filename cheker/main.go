@@ -47,8 +47,10 @@ func scanner(functions map[string]func(A, B *stack)) *command {
 			fmt.Println("Error")
 			os.Exit(1)
 		}
+		fmt.Println("Read command:", input)
 		addLink(&head, &command{input, nil, nil})
 	}
+
 	return head
 }
 
@@ -153,12 +155,14 @@ func stackFromArgNums(argv []string) stack {
 	for _, str := range argv {
 		split := strings.Split(str, " ")
 		for _, x := range split {
+			x = strings.TrimSuffix(x, ".")
 			num, err := strconv.Atoi(x)
 			if num < smallest {
 				smallest = num
 			}
+
 			if err != nil {
-				fmt.Println("Bad input")
+				fmt.Println("Bad input : ", x)
 				os.Exit(2)
 			}
 			if isDup(num) {
@@ -174,6 +178,8 @@ func stackFromArgNums(argv []string) stack {
 	return stackA
 }
 
+// go build -o ./cheker ../cheker
+// ARG="4 67 3 87 23"; ./push_swap "$ARG" | tee "opt.txt" | ./checker "$ARG".
 func main() {
 	functions := map[string]func(A, B *stack){
 		"sa": sa, "sb": sb, "ss": ss, "pa": pa, "pb": pb, "ra": ra, "rb": rb, "rr": rr, "rra": rra, "rrb": rrb, "rrr": rrr,
@@ -183,6 +189,7 @@ func main() {
 		os.Exit(2)
 	}
 	stackA := stackFromArgNums(os.Args[1:])
+	fmt.Println("Initial Stack A:", stackA)
 	stackB := stack{}
 	commandList := scanner(functions)
 	visualizer(commandList, &stackA, &stackB, functions)
