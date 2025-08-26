@@ -33,10 +33,10 @@ func dupChecker() func(int) bool {
 	}
 }
 
-func stackFromArgNums(stackA *stack, argv []string) {
+func stackFromArgNums(stackA **stack, argv []string) {
 	isDup := dupChecker()
-	// var stackA *stack
 	var smallest int
+	checker = false
 	for _, str := range argv {
 		if str == "--checker" {
 			checker = true
@@ -57,16 +57,16 @@ func stackFromArgNums(stackA *stack, argv []string) {
 				os.Exit(2)
 			}
 
-			appendNode(&stackA, num)
+			appendNode(stackA, num)
 		}
 	}
-	// return stackA
 }
 
 func appendNode(s **stack, val int) {
 	if s == nil {
 		return
 	}
+
 	node := &stack{
 		val:  val,
 		next: nil,
@@ -79,9 +79,10 @@ func appendNode(s **stack, val int) {
 		last.next = node
 		node.prev = last
 	}
+	// Optionally print the appended value for debugging
+	// fmt.Println("Appended", node.val)
 }
 
-// Helper to find the last node in the stack
 func findLastNode(s *stack) *stack {
 	if s == nil {
 		return nil
@@ -535,10 +536,11 @@ func main() {
 	if len(os.Args) == 1 {
 		os.Exit(2)
 	}
+	// fmt.Println("Initializing stack A from arguments...")
 	var stackA *stack
-	stackFromArgNums(stackA, os.Args[1:])
+	stackFromArgNums(&stackA, os.Args[1:])
 	var stackB *stack
-	printNode(stackA)
+	// printNode(stackA)
 	if !stackA.isSorted() {
 		if stack_len(stackA) == 2 {
 			sa(&stackA, checker)
@@ -549,5 +551,5 @@ func main() {
 			// push_swap(&stackA, &stackB) --- IGNORE ---
 		}
 	}
-	printNode(stackA)
+	// printNode(stackA)
 }
