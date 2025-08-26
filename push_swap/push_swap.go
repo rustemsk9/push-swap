@@ -8,6 +8,10 @@ import (
 	"strings"
 )
 
+//	type stack struct {
+//		curr []float32
+//		targetStack *stack
+//	}
 type stack []float64
 
 func dupChecker() func(int) bool {
@@ -63,9 +67,45 @@ func solve(A, B *stack) {
 	case 2:
 		two(A, B)
 	default:
-		values := valueStack{A, B}
+		// Use plan-based selective pushes
+		maxPushes := min(len(*A)/3, 2)
+		pushed := 0
 
-		mergeSort(values)
+		for len(*A) > 3 && pushed < maxPushes {
+			bestCost := -1
+			bestIdxA := 0
+			maxConsider := min(len(*A), 4)
+			for idxA := 0; idxA < maxConsider; idxA++ {
+				x := (*A)[idxA]
+				idxB := findInsertIdxBDesc(*B, x)
+				p := BestPlan(len(*A), idxA, len(*B), idxB)
+				cost := planCost(p)
+				if bestCost == -1 || cost < bestCost {
+					bestCost = cost
+					bestIdxA = idxA
+				}
+			}
+			x := (*A)[bestIdxA]
+			idxB := findInsertIdxBDesc(*B, x)
+			plan := BestPlan(len(*A), bestIdxA, len(*B), idxB)
+			ExecutePlan(A, B, plan)
+			pb(A, B)
+			pushed++
+			MaybeSS(A, B)
+		}
+
+		if len(*A) >= 4 && !(*A).isSorted() {
+			if len(*A) >= 2 && (*A)[0] > (*A)[1] {
+				ra(A, B)
+			}
+		}
+
+		// Solve remaining A
+		solve(A, B)
+		// Return all from B to A
+		for len(*B) > 0 {
+			pa(A, B)
+		}
 	}
 }
 
@@ -232,84 +272,6 @@ func rotateBToTop(A, B *stack, idx int) {
 	}
 }
 
-// ...existing code...
-
-// func main() {
-// 	// functions := map[string]func(A, B *stack){
-// 	// 	"sa": sa, "sb": sb, "ss": ss, "pa": pa, "pb": pb, "ra": ra, "rb": rb, "rr": rr, "rra": rra, "rrb": rrb, "rrr": rrr}
-
-// 	if len(os.Args) == 1 {
-// 		os.Exit(2)
-// 	}
-// 	stackA := stackFromArgNums(os.Args[1:])
-// 	stackB := stack{}
-
-// 	// 1) Многофазное разбиение A на B по двум пивотам, пока в A не останется <= 3
-// 	// 1) Многофазное разбиение A на B по двум пивотам, пока в A не останется <= 3
-// 	for len(stackA) > 3 {
-// 		p1, p2 := getPivots(stackA)
-// 		limit := len(stackA) // обрабатываем ровно текущий размер A
-// 		for processed := 0; processed < limit; processed++ {
-// 			x := stackA[0]
-// 			switch {
-// 			case x < p1:
-// 				// Малые — отправляем в B.
-// 				pb(&stackA, &stackB)
-// 				// Агрегация вращений: если следующий на вершине A — "большой" (>= p2),
-// 				// то мы бы сделали rb сейчас и ra на следующем шаге. Вместо этого делаем rr.
-// 				if len(stackA) > 0 && stackA[0] >= p2 {
-// 					rr(&stackA, &stackB)
-// 				} else {
-// 					rb(&stackA, &stackB)
-// 				}
-// 			case x < p2:
-// 				// Средние — просто в B без дополнительных вращений.
-// 				pb(&stackA, &stackB)
-// 			default:
-// 				// Большие — крутим A.
-// 				ra(&stackA, &stackB)
-// 			}
-// 		}
-// 	}
-
-// 	// 2) Досортировать малый A
-// 	switch len(stackA) {
-// 	case 3:
-// 		three(&stackA, &stackB)
-// 	case 2:
-// 		two(&stackA, &stackB)
-// 	}
-
-// 	// 3) Вернуть из B в A: каждый раз подтягиваем максимум в B на вершину и pa
-// 	for len(stackB) > 0 {
-// 		idx := indexOfMax(stackB)
-// 		rotateBToTop(&stackA, &stackB, idx)
-// 		pa(&stackA, &stackB)
-// 	}
-
-// 	// Готово: A по возрастанию, B пуст.
-
-// 	for _, x := range stackA {
-// 		fmt.Print(int(x), "A ")
-// 	}
-// 	fmt.Println()
-// 	for _, x := range stackB {
-// 		fmt.Print(int(x), "B ")
-// 	}
-// 	// return
-// 	// echo -e "pb\npb\nsb\nrb\npb\nsa\nrb\npb\nrb\npb\nrb\npb" | ./cheker "2 1 3 6 5 8"
-// 	solve(&stackA, &stackB)
-
-// 	for _, x := range stackA {
-// 		fmt.Print(int(x), " ")
-// 	}
-// 	fmt.Println()
-// 	for _, x := range stackB {
-// 		fmt.Print(int(x), " ")
-// 	}
-// 	fmt.Println()
-// }
-
 func pushAlot(A, B *stack, amount int) {
 	for amount > 0 { // Sorted then the left over? random? // argest set then random?
 		pb(A, B)
@@ -422,4 +384,6 @@ func main() {
 	for len(stackB) > 0 {
 		pa(&stackA, &stackB)
 	}
+
+	fmt.Println(stackA)
 }

@@ -50,57 +50,25 @@ func two(A, B *stack) {
 }
 
 func three(A, B *stack) {
-	if A.isSorted() {
+	a := *A
+	if len(a) != 3 {
 		return
 	}
-
-	a0, a1, a2 := (*A)[0], (*A)[1], (*A)[2]
-
-	// Simple and reliable case analysis
-	if a0 > a1 && a1 < a2 && a0 < a2 {
-		// 2 1 3 -> 1 2 3
-		if len(*B) >= 2 && (*B)[0] < (*B)[1] {
-			ss(A, B)
-		} else {
-			sa(A, B)
-		}
-	} else if a0 < a1 && a1 > a2 && a0 < a2 {
-		// 1 3 2 -> 1 2 3
-		if len(*B) >= 2 && (*B)[0] < (*B)[1] {
-			rrr(A, B)
-		} else {
-			rra(A, B)
-		}
-	} else if a0 < a1 && a1 > a2 && a0 > a2 {
-		// 2 3 1 -> 1 2 3
-		if len(*B) >= 2 && (*B)[0] < (*B)[1] {
-			rr(A, B)
-		} else {
-			ra(A, B)
-		}
-	} else if a0 > a1 && a1 > a2 {
-		// 3 2 1 -> 1 2 3 (need sa + rra)
+	switch {
+	case a[0] < a[1] && a[1] < a[2]:
+		// Already sorted
+		return
+	case a[0] > a[1] && a[1] < a[2] && a[0] < a[2]:
 		sa(A, B)
-		if !A.isSorted() {
-			if len(*B) >= 2 && (*B)[0] < (*B)[1] {
-				rrr(A, B)
-			} else {
-				rra(A, B)
-			}
-		}
-	} else if a0 > a1 && a1 < a2 && a0 > a2 {
-		// 3 1 2 -> 1 2 3 (need ra + sa)
-		if len(*B) >= 2 && (*B)[0] < (*B)[1] {
-			rr(A, B)
-		} else {
-			ra(A, B)
-		}
-		if !A.isSorted() {
-			if len(*B) >= 2 && (*B)[0] < (*B)[1] {
-				ss(A, B)
-			} else {
-				sa(A, B)
-			}
-		}
+	case a[0] > a[1] && a[1] > a[2]:
+		sa(A, B)
+		rra(A, B)
+	case a[0] > a[1] && a[1] < a[2] && a[0] > a[2]:
+		ra(A, B)
+	case a[0] < a[1] && a[1] > a[2] && a[0] < a[2]:
+		sa(A, B)
+		ra(A, B)
+	case a[0] < a[1] && a[1] > a[2] && a[0] > a[2]:
+		rra(A, B)
 	}
 }

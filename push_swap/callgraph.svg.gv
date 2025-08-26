@@ -1,0 +1,299 @@
+digraph gocallvis {
+    label="";
+    labeljust="l";
+    fontname="Arial";
+    fontsize="14";
+    rankdir="LR";
+    bgcolor="lightgray";
+    style="solid";
+    penwidth="0.5";
+    pad="0.0";
+    nodesep="0.35";
+
+    node [shape="box" style="filled,rounded" fillcolor="honeydew" fontname="Verdana" penwidth="1.0" margin="0.16,0.0"];
+    edge [minlen="2"]
+
+    subgraph "cluster_focus" {
+        bgcolor="#e6ecfa";
+label="main";
+labelloc="t";
+labeljust="c";
+fontsize="18";
+        
+        "(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot" [ label="(*stack).getPivot" penwidth="0.5" tooltip="(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot | defined in stackSlice.go:81\nat stackSlice.go:84: calling [errors.New]\nat stackSlice.go:88: calling [sort.Float64s]" fillcolor="lightblue" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted" [ penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted | defined in algo2.go:25\nat algo2.go:48: calling [github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted]\nat algo2.go:38: calling [github.com/ncollie42/push_swap----Go/push_swap.rr]\nat algo2.go:47: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]\nat algo2.go:43: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]\nat algo2.go:40: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]\nat algo2.go:34: calling [github.com/ncollie42/push_swap----Go/push_swap.ss]\nat algo2.go:30: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot]\nat algo2.go:31: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot]\nat algo2.go:44: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot]" fillcolor="lightblue" label="pushHalfSorted" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.pb" [ label="pb" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.pb | defined in functions.go:38\nat functions.go:41: calling [fmt.Print]\nat functions.go:42: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]\nat functions.go:39: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop]\nat functions.go:40: calling [github.com/ncollie42/push_swap----Go/push_swap.prepend]" fillcolor="lightblue" ]
+        "(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop" [ label="(*stack).pop" penwidth="0.5" tooltip="(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop | defined in stackSlice.go:26" fillcolor="lightblue" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.prepend" [ fillcolor="lightblue" label="prepend" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.prepend | defined in stackSlice.go:10" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ fillcolor="lightblue" label="printStacks" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.printStacks | defined in functions.go:7\nat functions.go:8: calling [fmt.Printf]\nat functions.go:9: calling [fmt.Printf]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.ss" [ label="ss" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.ss | defined in functions.go:24\nat functions.go:25: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap]\nat functions.go:26: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap]\nat functions.go:27: calling [fmt.Print]\nat functions.go:28: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" fillcolor="lightblue" ]
+        "(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap" [ fillcolor="lightblue" label="(*stack).swap" penwidth="0.5" tooltip="(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap | defined in stackSlice.go:17" ]
+        "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp" [ tooltip="(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp | defined in stackSlice.go:51\nat stackSlice.go:52: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop]" fillcolor="lightblue" label="(*stack).rotateUp" penwidth="0.5" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.rr" [ fillcolor="lightblue" label="rr" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.rr | defined in functions.go:57\nat functions.go:60: calling [fmt.Print]\nat functions.go:61: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]\nat functions.go:58: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp]\nat functions.go:59: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.ra" [ fillcolor="lightblue" label="ra" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.ra | defined in functions.go:45\nat functions.go:46: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp]\nat functions.go:48: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]\nat functions.go:47: calling [fmt.Print]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.algoTwo" [ fillcolor="lightblue" label="algoTwo" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.algoTwo | defined in algo2.go:7\nat algo2.go:8: calling [github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted]\nat algo2.go:12: calling [fmt.Println]\nat algo2.go:13: calling [github.com/ncollie42/push_swap----Go/push_swap.bringBack]\nat algo2.go:11: calling [github.com/ncollie42/push_swap----Go/push_swap.initSize2]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.initSize2" [ fillcolor="lightblue" label="initSize2" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.initSize2 | defined in mergsort.go:8\nat mergsort.go:30: calling [fmt.Fprintln]\nat mergsort.go:31: calling [fmt.Fprintln]\nat mergsort.go:32: calling [fmt.Fprintln]\nat mergsort.go:33: calling [fmt.Fprintln]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.pa" [ label="pa" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.pa | defined in functions.go:31\nat functions.go:33: calling [github.com/ncollie42/push_swap----Go/push_swap.prepend]\nat functions.go:34: calling [fmt.Print]\nat functions.go:35: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]\nat functions.go:32: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop]" fillcolor="lightblue" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.bringBack" [ fillcolor="lightblue" label="bringBack" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.bringBack | defined in algo2.go:16\nat algo2.go:18: calling [github.com/ncollie42/push_swap----Go/push_swap.pa]\nat algo2.go:20: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.sa" [ fillcolor="lightblue" label="sa" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.sa | defined in functions.go:12\nat functions.go:13: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap]\nat functions.go:15: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]\nat functions.go:14: calling [fmt.Print]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.rb" [ tooltip="github.com/ncollie42/push_swap----Go/push_swap.rb | defined in functions.go:51\nat functions.go:52: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp]\nat functions.go:54: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]\nat functions.go:53: calling [fmt.Print]" fillcolor="lightblue" label="rb" penwidth="0.5" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.BestPlan" [ fillcolor="lightblue" label="BestPlan" penwidth="1.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.BestPlan | defined in push_swap.go:137\nat push_swap.go:138: calling [github.com/ncollie42/push_swap----Go/push_swap.rotationsToTop]\nat push_swap.go:139: calling [github.com/ncollie42/push_swap----Go/push_swap.rotationsToTop]\nat push_swap.go:165: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]\nat push_swap.go:167: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]\nat push_swap.go:170: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]\nat push_swap.go:173: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]\nat push_swap.go:143: calling [github.com/ncollie42/push_swap----Go/push_swap.min]\nat push_swap.go:149: calling [github.com/ncollie42/push_swap----Go/push_swap.min]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.rotationsToTop" [ fillcolor="lightblue" label="rotationsToTop" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.rotationsToTop | defined in push_swap.go:121" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.min" [ fillcolor="lightblue" label="min" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.min | defined in push_swap.go:220" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.planCost" [ label="planCost" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.planCost | defined in push_swap.go:131" fillcolor="lightblue" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.two" [ fillcolor="lightblue" label="two" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.two | defined in small.go:39\nat small.go:48: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]\nat small.go:46: calling [github.com/ncollie42/push_swap----Go/push_swap.ss]\nat small.go:40: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]" ]
+        "(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted" [ label="(*stack).isSorted" penwidth="0.5" tooltip="(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted | defined in stackSlice.go:58" fillcolor="lightblue" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.check" [ penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.check | defined in functions.go:83\nat functions.go:84: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isEmpty]\nat functions.go:84: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]" fillcolor="lightblue" label="check" ]
+        "(*github.com/ncollie42/push_swap----Go/push_swap.stack).isEmpty" [ fillcolor="lightblue" label="(*stack).isEmpty" penwidth="0.5" tooltip="(*github.com/ncollie42/push_swap----Go/push_swap.stack).isEmpty | defined in stackSlice.go:67" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.three" [ fillcolor="lightblue" label="three" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.three | defined in small.go:52\nat small.go:65: calling [github.com/ncollie42/push_swap----Go/push_swap.rra]\nat small.go:72: calling [github.com/ncollie42/push_swap----Go/push_swap.rra]\nat small.go:62: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]\nat small.go:64: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]\nat small.go:69: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]\nat small.go:67: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]\nat small.go:70: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]" ]
+        "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown" [ tooltip="(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown | defined in stackSlice.go:44\nat stackSlice.go:45: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).popBot]\nat stackSlice.go:47: calling [github.com/ncollie42/push_swap----Go/push_swap.prepend]" fillcolor="lightblue" label="(*stack).rotateDown" penwidth="0.5" ]
+        "(*github.com/ncollie42/push_swap----Go/push_swap.stack).popBot" [ penwidth="0.5" tooltip="(*github.com/ncollie42/push_swap----Go/push_swap.stack).popBot | defined in stackSlice.go:35" fillcolor="lightblue" label="(*stack).popBot" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.rra" [ fillcolor="lightblue" label="rra" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.rra | defined in functions.go:64\nat functions.go:66: calling [fmt.Print]\nat functions.go:67: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]\nat functions.go:65: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.four_Five" [ fillcolor="lightblue" label="four_Five" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.four_Five | defined in small.go:3\nat small.go:18: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]\nat small.go:27: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]\nat small.go:30: calling [github.com/ncollie42/push_swap----Go/push_swap.rra]\nat small.go:21: calling [github.com/ncollie42/push_swap----Go/push_swap.rrr]\nat small.go:20: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]\nat small.go:29: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]\nat small.go:14: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]\nat small.go:25: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]\nat small.go:5: calling [github.com/ncollie42/push_swap----Go/push_swap.three]\nat small.go:35: calling [github.com/ncollie42/push_swap----Go/push_swap.three]\nat small.go:16: calling [github.com/ncollie42/push_swap----Go/push_swap.ss]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.rrr" [ penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.rrr | defined in functions.go:76\nat functions.go:80: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]\nat functions.go:77: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown]\nat functions.go:78: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown]\nat functions.go:79: calling [fmt.Print]" fillcolor="lightblue" label="rrr" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.solve" [ fillcolor="lightblue" label="solve" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.solve | defined in push_swap.go:61\nat push_swap.go:71: calling [github.com/ncollie42/push_swap----Go/push_swap.min]\nat push_swap.go:77: calling [github.com/ncollie42/push_swap----Go/push_swap.min]\nat push_swap.go:97: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]\nat push_swap.go:99: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]\nat push_swap.go:107: calling [github.com/ncollie42/push_swap----Go/push_swap.pa]\nat push_swap.go:92: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]\nat push_swap.go:82: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]\nat push_swap.go:66: calling [github.com/ncollie42/push_swap----Go/push_swap.three]\nat push_swap.go:91: calling [github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan]\nat push_swap.go:94: calling [github.com/ncollie42/push_swap----Go/push_swap.MaybeSS]\nat push_swap.go:80: calling [github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc]\nat push_swap.go:89: calling [github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc]\nat push_swap.go:104: calling [github.com/ncollie42/push_swap----Go/push_swap.solve]\nat push_swap.go:64: calling [github.com/ncollie42/push_swap----Go/push_swap.four_Five]\nat push_swap.go:68: calling [github.com/ncollie42/push_swap----Go/push_swap.two]\nat push_swap.go:81: calling [github.com/ncollie42/push_swap----Go/push_swap.BestPlan]\nat push_swap.go:90: calling [github.com/ncollie42/push_swap----Go/push_swap.BestPlan]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc" [ penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc | defined in push_swap.go:299" fillcolor="lightblue" label="findInsertIdxBDesc" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan" [ penwidth="1.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan | defined in push_swap.go:182\nat push_swap.go:193: calling [github.com/ncollie42/push_swap----Go/push_swap.rra]\nat push_swap.go:187: calling [github.com/ncollie42/push_swap----Go/push_swap.rrr]\nat push_swap.go:184: calling [github.com/ncollie42/push_swap----Go/push_swap.rr]\nat push_swap.go:196: calling [github.com/ncollie42/push_swap----Go/push_swap.rb]\nat push_swap.go:190: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]\nat push_swap.go:199: calling [github.com/ncollie42/push_swap----Go/push_swap.rrb]" fillcolor="lightblue" label="ExecutePlan" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.rrb" [ fillcolor="lightblue" label="rrb" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.rrb | defined in functions.go:70\nat functions.go:72: calling [fmt.Print]\nat functions.go:71: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown]\nat functions.go:73: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.MaybeSS" [ fillcolor="lightblue" label="MaybeSS" penwidth="1.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.MaybeSS | defined in push_swap.go:206\nat push_swap.go:214: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]\nat push_swap.go:212: calling [github.com/ncollie42/push_swap----Go/push_swap.ss]\nat push_swap.go:216: calling [github.com/ncollie42/push_swap----Go/push_swap.sb]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.sb" [ fillcolor="lightblue" label="sb" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.sb | defined in functions.go:18\nat functions.go:20: calling [fmt.Print]\nat functions.go:21: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]\nat functions.go:19: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.stackFromArgNums" [ fillcolor="lightblue" label="stackFromArgNums" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.stackFromArgNums | defined in push_swap.go:29\nat push_swap.go:34: calling [strings.Split]\nat push_swap.go:36: calling [strconv.Atoi]\nat push_swap.go:41: calling [fmt.Println]\nat push_swap.go:45: calling [fmt.Println]\nat push_swap.go:30: calling [github.com/ncollie42/push_swap----Go/push_swap.dupChecker]\nat push_swap.go:42: calling [os.Exit]\nat push_swap.go:46: calling [os.Exit]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.dupChecker" [ fillcolor="lightblue" label="dupChecker" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.dupChecker | defined in push_swap.go:17" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.main" [ tooltip="github.com/ncollie42/push_swap----Go/push_swap.main | defined in push_swap.go:327\nat push_swap.go:377: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]\nat push_swap.go:373: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]\nat push_swap.go:353: calling [github.com/ncollie42/push_swap----Go/push_swap.BestPlan]\nat push_swap.go:364: calling [github.com/ncollie42/push_swap----Go/push_swap.BestPlan]\nat push_swap.go:365: calling [github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan]\nat push_swap.go:336: calling [github.com/ncollie42/push_swap----Go/push_swap.solve]\nat push_swap.go:381: calling [github.com/ncollie42/push_swap----Go/push_swap.solve]\nat push_swap.go:341: calling [github.com/ncollie42/push_swap----Go/push_swap.min]\nat push_swap.go:349: calling [github.com/ncollie42/push_swap----Go/push_swap.min]\nat push_swap.go:370: calling [github.com/ncollie42/push_swap----Go/push_swap.MaybeSS]\nat push_swap.go:388: calling [fmt.Println]\nat push_swap.go:385: calling [github.com/ncollie42/push_swap----Go/push_swap.pa]\nat push_swap.go:352: calling [github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc]\nat push_swap.go:363: calling [github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc]\nat push_swap.go:366: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]\nat push_swap.go:354: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]\nat push_swap.go:329: calling [os.Exit]\nat push_swap.go:331: calling [github.com/ncollie42/push_swap----Go/push_swap.stackFromArgNums]" fillcolor="lightblue" label="main" penwidth="0.5" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.pushAlotRev" [ fillcolor="lightblue" label="pushAlotRev" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.pushAlotRev | defined in push_swap.go:282\nat push_swap.go:285: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]\nat push_swap.go:284: calling [github.com/ncollie42/push_swap----Go/push_swap.rra]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.stablelize" [ fillcolor="lightblue" label="stablelize" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.stablelize | defined in mergsort.go:106\nat mergsort.go:115: calling [github.com/ncollie42/push_swap----Go/push_swap.insertion]\nat mergsort.go:122: calling [github.com/ncollie42/push_swap----Go/push_swap.insertion]\nat mergsort.go:112: calling [fmt.Fprintln]\nat mergsort.go:113: calling [fmt.Fprintln]\nat mergsort.go:116: calling [fmt.Fprintln]\nat mergsort.go:118: calling [fmt.Fprintln]\nat mergsort.go:123: calling [fmt.Fprintln]\nat mergsort.go:125: calling [fmt.Fprintln]\nat mergsort.go:128: calling [fmt.Fprintln]\nat mergsort.go:117: calling [github.com/ncollie42/push_swap----Go/push_swap.updateStacks]\nat mergsort.go:124: calling [github.com/ncollie42/push_swap----Go/push_swap.updateStacks]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.insertion" [ fillcolor="lightblue" label="insertion" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.insertion | defined in mergsort.go:36\nat mergsort.go:59: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]\nat mergsort.go:66: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]\nat mergsort.go:59: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.updateStacks" [ fillcolor="lightblue" label="updateStacks" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.updateStacks | defined in mergsort.go:74\nat mergsort.go:85: calling [fmt.Fprintln]\nat mergsort.go:86: calling [fmt.Fprintln]\nat mergsort.go:75: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop]\nat mergsort.go:76: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.rotateBToTop" [ label="rotateBToTop" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.rotateBToTop | defined in push_swap.go:259\nat push_swap.go:270: calling [github.com/ncollie42/push_swap----Go/push_swap.rrb]\nat push_swap.go:266: calling [github.com/ncollie42/push_swap----Go/push_swap.rb]" fillcolor="lightblue" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.pushAlot" [ fillcolor="lightblue" label="pushAlot" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.pushAlot | defined in push_swap.go:275\nat push_swap.go:277: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.mergeSort" [ fillcolor="lightblue" label="mergeSort" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.mergeSort | defined in mergsort.go:89\nat mergsort.go:96: calling [fmt.Fprintln]\nat mergsort.go:99: calling [fmt.Fprintln]\nat mergsort.go:101: calling [fmt.Fprintln]\nat mergsort.go:93: calling [github.com/ncollie42/push_swap----Go/push_swap.initSize2]\nat mergsort.go:90: calling [github.com/ncollie42/push_swap----Go/push_swap.pushAlot]\nat mergsort.go:94: calling [github.com/ncollie42/push_swap----Go/push_swap.stablelize]\nat mergsort.go:98: calling [github.com/ncollie42/push_swap----Go/push_swap.insertion]\nat mergsort.go:100: calling [github.com/ncollie42/push_swap----Go/push_swap.updateStacks]" ]
+        "github.com/ncollie42/push_swap----Go/push_swap.getPivots" [ label="getPivots" penwidth="0.5" tooltip="github.com/ncollie42/push_swap----Go/push_swap.getPivots | defined in push_swap.go:228\nat push_swap.go:235: calling [sort.Float64s]" fillcolor="lightblue" ]
+        
+        subgraph "cluster_errors" {
+        URL="/?f=errors";
+fillcolor="#E0FFE1";
+label="errors";
+tooltip="package: errors";
+penwidth="0.8";
+fontsize="16";
+style="filled";
+fontname="Tahoma bold";
+rank="sink";
+        
+        "errors.New" [ label="New" penwidth="1.5" tooltip="errors.New | defined in errors.go:64" fillcolor="#adedad" ]
+        
+    }
+
+        subgraph "cluster_fmt" {
+        rank="sink";
+URL="/?f=fmt";
+fontsize="16";
+label="fmt";
+tooltip="package: fmt";
+penwidth="0.8";
+style="filled";
+fillcolor="#E0FFE1";
+fontname="Tahoma bold";
+        
+        "fmt.Print" [ fillcolor="#adedad" label="Print" penwidth="1.5" tooltip="fmt.Print | defined in print.go:271" ]
+        "fmt.Printf" [ fillcolor="#adedad" label="Printf" penwidth="1.5" tooltip="fmt.Printf | defined in print.go:232" ]
+        "fmt.Fprintln" [ tooltip="fmt.Fprintln | defined in print.go:302" fillcolor="#adedad" label="Fprintln" penwidth="1.5" ]
+        "fmt.Println" [ fillcolor="#adedad" label="Println" penwidth="1.5" tooltip="fmt.Println | defined in print.go:313" ]
+        
+    }
+
+        subgraph "cluster_os" {
+        penwidth="0.8";
+style="filled";
+fillcolor="#E0FFE1";
+fontname="Tahoma bold";
+label="os";
+fontsize="16";
+rank="sink";
+URL="/?f=os";
+tooltip="package: os";
+        
+        "os.Exit" [ fillcolor="#adedad" label="Exit" penwidth="1.5" tooltip="os.Exit | defined in proc.go:62" ]
+        
+    }
+
+        subgraph "cluster_sort" {
+        penwidth="0.8";
+fontname="Tahoma bold";
+label="sort";
+URL="/?f=sort";
+tooltip="package: sort";
+fontsize="16";
+style="filled";
+fillcolor="#E0FFE1";
+rank="sink";
+        
+        "sort.Float64s" [ fillcolor="#adedad" label="Float64s" penwidth="1.5" tooltip="sort.Float64s | defined in sort.go:174" ]
+        
+    }
+
+        subgraph "cluster_strconv" {
+        fontsize="16";
+fillcolor="#E0FFE1";
+fontname="Tahoma bold";
+URL="/?f=strconv";
+penwidth="0.8";
+style="filled";
+rank="sink";
+label="strconv";
+tooltip="package: strconv";
+        
+        "strconv.Atoi" [ label="Atoi" penwidth="1.5" tooltip="strconv.Atoi | defined in atoi.go:242" fillcolor="#adedad" ]
+        
+    }
+
+        subgraph "cluster_strings" {
+        penwidth="0.8";
+fillcolor="#E0FFE1";
+fontname="Tahoma bold";
+rank="sink";
+label="strings";
+URL="/?f=strings";
+fontsize="16";
+style="filled";
+tooltip="package: strings";
+        
+        "strings.Split" [ fillcolor="#adedad" label="Split" penwidth="1.5" tooltip="strings.Split | defined in strings.go:361" ]
+        
+    }
+
+    }
+
+    "github.com/ncollie42/push_swap----Go/push_swap.rra" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:66: calling [fmt.Print]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.four_Five" -> "github.com/ncollie42/push_swap----Go/push_swap.sa" [ tooltip="at small.go:18: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]\nat small.go:27: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rrr" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:80: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.four_Five" -> "github.com/ncollie42/push_swap----Go/push_swap.rra" [ tooltip="at small.go:30: calling [github.com/ncollie42/push_swap----Go/push_swap.rra]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan" -> "github.com/ncollie42/push_swap----Go/push_swap.rra" [ tooltip="at push_swap.go:193: calling [github.com/ncollie42/push_swap----Go/push_swap.rra]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.ra" [ tooltip="at push_swap.go:377: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ra" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp" [ tooltip="at functions.go:46: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ra" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:48: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rrb" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:72: calling [fmt.Print]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.MaybeSS" -> "github.com/ncollie42/push_swap----Go/push_swap.sa" [ tooltip="at push_swap.go:214: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.updateStacks" -> "fmt.Fprintln" [ tooltip="at mergsort.go:85: calling [fmt.Fprintln]\nat mergsort.go:86: calling [fmt.Fprintln]" color="saddlebrown" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pushAlot" -> "github.com/ncollie42/push_swap----Go/push_swap.pb" [ tooltip="at push_swap.go:277: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pa" -> "github.com/ncollie42/push_swap----Go/push_swap.prepend" [ tooltip="at functions.go:33: calling [github.com/ncollie42/push_swap----Go/push_swap.prepend]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.sa" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap" [ tooltip="at functions.go:13: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.stablelize" -> "github.com/ncollie42/push_swap----Go/push_swap.insertion" [ tooltip="at mergsort.go:115: calling [github.com/ncollie42/push_swap----Go/push_swap.insertion]\nat mergsort.go:122: calling [github.com/ncollie42/push_swap----Go/push_swap.insertion]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.updateStacks" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop" [ tooltip="at mergsort.go:75: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop]\nat mergsort.go:76: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.BestPlan" -> "github.com/ncollie42/push_swap----Go/push_swap.rotationsToTop" [ tooltip="at push_swap.go:138: calling [github.com/ncollie42/push_swap----Go/push_swap.rotationsToTop]\nat push_swap.go:139: calling [github.com/ncollie42/push_swap----Go/push_swap.rotationsToTop]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rra" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:67: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan" -> "github.com/ncollie42/push_swap----Go/push_swap.rrr" [ tooltip="at push_swap.go:187: calling [github.com/ncollie42/push_swap----Go/push_swap.rrr]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.sb" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:20: calling [fmt.Print]" ]
+    "(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot" -> "errors.New" [ color="saddlebrown" tooltip="at stackSlice.go:84: calling [errors.New]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.algoTwo" -> "github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted" [ tooltip="at algo2.go:8: calling [github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.check" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).isEmpty" [ tooltip="at functions.go:84: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isEmpty]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.four_Five" -> "github.com/ncollie42/push_swap----Go/push_swap.rrr" [ tooltip="at small.go:21: calling [github.com/ncollie42/push_swap----Go/push_swap.rrr]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan" -> "github.com/ncollie42/push_swap----Go/push_swap.rr" [ tooltip="at push_swap.go:184: calling [github.com/ncollie42/push_swap----Go/push_swap.rr]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.MaybeSS" -> "github.com/ncollie42/push_swap----Go/push_swap.ss" [ tooltip="at push_swap.go:212: calling [github.com/ncollie42/push_swap----Go/push_swap.ss]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pb" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:41: calling [fmt.Print]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.sb" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:21: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pb" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:42: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.bringBack" -> "github.com/ncollie42/push_swap----Go/push_swap.pa" [ tooltip="at algo2.go:18: calling [github.com/ncollie42/push_swap----Go/push_swap.pa]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.min" [ tooltip="at push_swap.go:71: calling [github.com/ncollie42/push_swap----Go/push_swap.min]\nat push_swap.go:77: calling [github.com/ncollie42/push_swap----Go/push_swap.min]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pushAlotRev" -> "github.com/ncollie42/push_swap----Go/push_swap.pb" [ tooltip="at push_swap.go:285: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.mergeSort" -> "fmt.Fprintln" [ color="saddlebrown" tooltip="at mergsort.go:96: calling [fmt.Fprintln]\nat mergsort.go:99: calling [fmt.Fprintln]\nat mergsort.go:101: calling [fmt.Fprintln]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.three" -> "github.com/ncollie42/push_swap----Go/push_swap.rra" [ tooltip="at small.go:65: calling [github.com/ncollie42/push_swap----Go/push_swap.rra]\nat small.go:72: calling [github.com/ncollie42/push_swap----Go/push_swap.rra]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.four_Five" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted" [ tooltip="at small.go:20: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]\nat small.go:29: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.sb" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap" [ tooltip="at functions.go:19: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.mergeSort" -> "github.com/ncollie42/push_swap----Go/push_swap.initSize2" [ tooltip="at mergsort.go:93: calling [github.com/ncollie42/push_swap----Go/push_swap.initSize2]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.printStacks" -> "fmt.Printf" [ color="saddlebrown" tooltip="at functions.go:8: calling [fmt.Printf]\nat functions.go:9: calling [fmt.Printf]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted" [ tooltip="at push_swap.go:97: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted" [ tooltip="at push_swap.go:373: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pushAlotRev" -> "github.com/ncollie42/push_swap----Go/push_swap.rra" [ tooltip="at push_swap.go:284: calling [github.com/ncollie42/push_swap----Go/push_swap.rra]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.getPivots" -> "sort.Float64s" [ color="saddlebrown" tooltip="at push_swap.go:235: calling [sort.Float64s]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rrr" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown" [ tooltip="at functions.go:77: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown]\nat functions.go:78: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.stackFromArgNums" -> "strings.Split" [ tooltip="at push_swap.go:34: calling [strings.Split]" color="saddlebrown" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.BestPlan" [ tooltip="at push_swap.go:353: calling [github.com/ncollie42/push_swap----Go/push_swap.BestPlan]\nat push_swap.go:364: calling [github.com/ncollie42/push_swap----Go/push_swap.BestPlan]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan" [ tooltip="at push_swap.go:365: calling [github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.mergeSort" -> "github.com/ncollie42/push_swap----Go/push_swap.pushAlot" [ tooltip="at mergsort.go:90: calling [github.com/ncollie42/push_swap----Go/push_swap.pushAlot]" ]
+    "(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot" -> "sort.Float64s" [ color="saddlebrown" tooltip="at stackSlice.go:88: calling [sort.Float64s]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pb" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop" [ tooltip="at functions.go:39: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.algoTwo" -> "fmt.Println" [ tooltip="at algo2.go:12: calling [fmt.Println]" color="saddlebrown" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.algoTwo" -> "github.com/ncollie42/push_swap----Go/push_swap.bringBack" [ tooltip="at algo2.go:13: calling [github.com/ncollie42/push_swap----Go/push_swap.bringBack]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.BestPlan" -> "github.com/ncollie42/push_swap----Go/push_swap.planCost" [ tooltip="at push_swap.go:165: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]\nat push_swap.go:167: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]\nat push_swap.go:170: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]\nat push_swap.go:173: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.two" -> "github.com/ncollie42/push_swap----Go/push_swap.sa" [ tooltip="at small.go:48: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]" ]
+    "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).popBot" [ tooltip="at stackSlice.go:45: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).popBot]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rra" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown" [ tooltip="at functions.go:65: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pa" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:34: calling [fmt.Print]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan" -> "github.com/ncollie42/push_swap----Go/push_swap.rb" [ tooltip="at push_swap.go:196: calling [github.com/ncollie42/push_swap----Go/push_swap.rb]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.ra" [ tooltip="at push_swap.go:99: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.solve" [ tooltip="at push_swap.go:336: calling [github.com/ncollie42/push_swap----Go/push_swap.solve]\nat push_swap.go:381: calling [github.com/ncollie42/push_swap----Go/push_swap.solve]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.min" [ tooltip="at push_swap.go:341: calling [github.com/ncollie42/push_swap----Go/push_swap.min]\nat push_swap.go:349: calling [github.com/ncollie42/push_swap----Go/push_swap.min]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.mergeSort" -> "github.com/ncollie42/push_swap----Go/push_swap.stablelize" [ tooltip="at mergsort.go:94: calling [github.com/ncollie42/push_swap----Go/push_swap.stablelize]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.MaybeSS" [ tooltip="at push_swap.go:370: calling [github.com/ncollie42/push_swap----Go/push_swap.MaybeSS]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pb" -> "github.com/ncollie42/push_swap----Go/push_swap.prepend" [ tooltip="at functions.go:40: calling [github.com/ncollie42/push_swap----Go/push_swap.prepend]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rrb" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown" [ tooltip="at functions.go:71: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.pa" [ tooltip="at push_swap.go:107: calling [github.com/ncollie42/push_swap----Go/push_swap.pa]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "fmt.Println" [ color="saddlebrown" tooltip="at push_swap.go:388: calling [fmt.Println]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ss" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap" [ tooltip="at functions.go:25: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap]\nat functions.go:26: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).swap]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan" -> "github.com/ncollie42/push_swap----Go/push_swap.ra" [ tooltip="at push_swap.go:190: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted" -> "github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted" [ tooltip="at algo2.go:48: calling [github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ss" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:27: calling [fmt.Print]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted" -> "github.com/ncollie42/push_swap----Go/push_swap.rr" [ tooltip="at algo2.go:38: calling [github.com/ncollie42/push_swap----Go/push_swap.rr]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.two" -> "github.com/ncollie42/push_swap----Go/push_swap.ss" [ tooltip="at small.go:46: calling [github.com/ncollie42/push_swap----Go/push_swap.ss]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.algoTwo" -> "github.com/ncollie42/push_swap----Go/push_swap.initSize2" [ tooltip="at algo2.go:11: calling [github.com/ncollie42/push_swap----Go/push_swap.initSize2]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.pb" [ tooltip="at push_swap.go:92: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.stackFromArgNums" -> "strconv.Atoi" [ color="saddlebrown" tooltip="at push_swap.go:36: calling [strconv.Atoi]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.insertion" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted" [ tooltip="at mergsort.go:59: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]\nat mergsort.go:66: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]\nat mergsort.go:59: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.stackFromArgNums" -> "fmt.Println" [ color="saddlebrown" tooltip="at push_swap.go:41: calling [fmt.Println]\nat push_swap.go:45: calling [fmt.Println]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ss" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:28: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.sa" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:15: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.check" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted" [ tooltip="at functions.go:84: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.planCost" [ tooltip="at push_swap.go:82: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted" -> "github.com/ncollie42/push_swap----Go/push_swap.pb" [ tooltip="at algo2.go:47: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]\nat algo2.go:43: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.three" [ tooltip="at push_swap.go:66: calling [github.com/ncollie42/push_swap----Go/push_swap.three]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.stablelize" -> "fmt.Fprintln" [ tooltip="at mergsort.go:112: calling [fmt.Fprintln]\nat mergsort.go:113: calling [fmt.Fprintln]\nat mergsort.go:116: calling [fmt.Fprintln]\nat mergsort.go:118: calling [fmt.Fprintln]\nat mergsort.go:123: calling [fmt.Fprintln]\nat mergsort.go:125: calling [fmt.Fprintln]\nat mergsort.go:128: calling [fmt.Fprintln]" color="saddlebrown" ]
+    "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop" [ tooltip="at stackSlice.go:52: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rr" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:60: calling [fmt.Print]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.sa" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:14: calling [fmt.Print]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.four_Five" -> "github.com/ncollie42/push_swap----Go/push_swap.ra" [ tooltip="at small.go:14: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]\nat small.go:25: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan" [ tooltip="at push_swap.go:91: calling [github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.stablelize" -> "github.com/ncollie42/push_swap----Go/push_swap.updateStacks" [ tooltip="at mergsort.go:117: calling [github.com/ncollie42/push_swap----Go/push_swap.updateStacks]\nat mergsort.go:124: calling [github.com/ncollie42/push_swap----Go/push_swap.updateStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.initSize2" -> "fmt.Fprintln" [ tooltip="at mergsort.go:30: calling [fmt.Fprintln]\nat mergsort.go:31: calling [fmt.Fprintln]\nat mergsort.go:32: calling [fmt.Fprintln]\nat mergsort.go:33: calling [fmt.Fprintln]" color="saddlebrown" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.three" -> "github.com/ncollie42/push_swap----Go/push_swap.sa" [ tooltip="at small.go:62: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]\nat small.go:64: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]\nat small.go:69: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rrb" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:73: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rotateBToTop" -> "github.com/ncollie42/push_swap----Go/push_swap.rrb" [ tooltip="at push_swap.go:270: calling [github.com/ncollie42/push_swap----Go/push_swap.rrb]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted" -> "github.com/ncollie42/push_swap----Go/push_swap.ra" [ tooltip="at algo2.go:40: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.MaybeSS" [ tooltip="at push_swap.go:94: calling [github.com/ncollie42/push_swap----Go/push_swap.MaybeSS]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pa" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:35: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rb" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp" [ tooltip="at functions.go:52: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rrr" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:79: calling [fmt.Print]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rr" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:61: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rb" -> "github.com/ncollie42/push_swap----Go/push_swap.printStacks" [ tooltip="at functions.go:54: calling [github.com/ncollie42/push_swap----Go/push_swap.printStacks]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.two" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted" [ tooltip="at small.go:40: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).isSorted]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.pa" [ tooltip="at push_swap.go:385: calling [github.com/ncollie42/push_swap----Go/push_swap.pa]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.bringBack" -> "github.com/ncollie42/push_swap----Go/push_swap.sa" [ tooltip="at algo2.go:20: calling [github.com/ncollie42/push_swap----Go/push_swap.sa]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.three" -> "github.com/ncollie42/push_swap----Go/push_swap.ra" [ tooltip="at small.go:67: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]\nat small.go:70: calling [github.com/ncollie42/push_swap----Go/push_swap.ra]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc" [ tooltip="at push_swap.go:352: calling [github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc]\nat push_swap.go:363: calling [github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.pb" [ tooltip="at push_swap.go:366: calling [github.com/ncollie42/push_swap----Go/push_swap.pb]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rb" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:53: calling [fmt.Print]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.BestPlan" -> "github.com/ncollie42/push_swap----Go/push_swap.min" [ tooltip="at push_swap.go:143: calling [github.com/ncollie42/push_swap----Go/push_swap.min]\nat push_swap.go:149: calling [github.com/ncollie42/push_swap----Go/push_swap.min]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc" [ tooltip="at push_swap.go:80: calling [github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc]\nat push_swap.go:89: calling [github.com/ncollie42/push_swap----Go/push_swap.findInsertIdxBDesc]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.mergeSort" -> "github.com/ncollie42/push_swap----Go/push_swap.insertion" [ tooltip="at mergsort.go:98: calling [github.com/ncollie42/push_swap----Go/push_swap.insertion]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ra" -> "fmt.Print" [ color="saddlebrown" tooltip="at functions.go:47: calling [fmt.Print]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.ExecutePlan" -> "github.com/ncollie42/push_swap----Go/push_swap.rrb" [ tooltip="at push_swap.go:199: calling [github.com/ncollie42/push_swap----Go/push_swap.rrb]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.solve" [ tooltip="at push_swap.go:104: calling [github.com/ncollie42/push_swap----Go/push_swap.solve]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.planCost" [ tooltip="at push_swap.go:354: calling [github.com/ncollie42/push_swap----Go/push_swap.planCost]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted" -> "github.com/ncollie42/push_swap----Go/push_swap.ss" [ tooltip="at algo2.go:34: calling [github.com/ncollie42/push_swap----Go/push_swap.ss]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pa" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop" [ tooltip="at functions.go:32: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).pop]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.MaybeSS" -> "github.com/ncollie42/push_swap----Go/push_swap.sb" [ tooltip="at push_swap.go:216: calling [github.com/ncollie42/push_swap----Go/push_swap.sb]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.stackFromArgNums" -> "github.com/ncollie42/push_swap----Go/push_swap.dupChecker" [ tooltip="at push_swap.go:30: calling [github.com/ncollie42/push_swap----Go/push_swap.dupChecker]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "os.Exit" [ color="saddlebrown" tooltip="at push_swap.go:329: calling [os.Exit]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rr" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp" [ tooltip="at functions.go:58: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp]\nat functions.go:59: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateUp]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.four_Five" -> "github.com/ncollie42/push_swap----Go/push_swap.three" [ tooltip="at small.go:5: calling [github.com/ncollie42/push_swap----Go/push_swap.three]\nat small.go:35: calling [github.com/ncollie42/push_swap----Go/push_swap.three]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.four_Five" [ tooltip="at push_swap.go:64: calling [github.com/ncollie42/push_swap----Go/push_swap.four_Five]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.two" [ tooltip="at push_swap.go:68: calling [github.com/ncollie42/push_swap----Go/push_swap.two]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.pushHalfSorted" -> "(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot" [ tooltip="at algo2.go:30: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot]\nat algo2.go:31: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot]\nat algo2.go:44: calling [(*github.com/ncollie42/push_swap----Go/push_swap.stack).getPivot]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.four_Five" -> "github.com/ncollie42/push_swap----Go/push_swap.ss" [ tooltip="at small.go:16: calling [github.com/ncollie42/push_swap----Go/push_swap.ss]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.stackFromArgNums" -> "os.Exit" [ color="saddlebrown" tooltip="at push_swap.go:42: calling [os.Exit]\nat push_swap.go:46: calling [os.Exit]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.main" -> "github.com/ncollie42/push_swap----Go/push_swap.stackFromArgNums" [ tooltip="at push_swap.go:331: calling [github.com/ncollie42/push_swap----Go/push_swap.stackFromArgNums]" ]
+    "(*github.com/ncollie42/push_swap----Go/push_swap.stack).rotateDown" -> "github.com/ncollie42/push_swap----Go/push_swap.prepend" [ tooltip="at stackSlice.go:47: calling [github.com/ncollie42/push_swap----Go/push_swap.prepend]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.solve" -> "github.com/ncollie42/push_swap----Go/push_swap.BestPlan" [ tooltip="at push_swap.go:81: calling [github.com/ncollie42/push_swap----Go/push_swap.BestPlan]\nat push_swap.go:90: calling [github.com/ncollie42/push_swap----Go/push_swap.BestPlan]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.rotateBToTop" -> "github.com/ncollie42/push_swap----Go/push_swap.rb" [ tooltip="at push_swap.go:266: calling [github.com/ncollie42/push_swap----Go/push_swap.rb]" ]
+    "github.com/ncollie42/push_swap----Go/push_swap.mergeSort" -> "github.com/ncollie42/push_swap----Go/push_swap.updateStacks" [ tooltip="at mergsort.go:100: calling [github.com/ncollie42/push_swap----Go/push_swap.updateStacks]" ]
+}

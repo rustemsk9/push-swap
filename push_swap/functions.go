@@ -4,64 +4,80 @@ import (
 	"fmt"
 )
 
+func printStacks(A, B *stack) {
+	fmt.Printf("A: %v\t", *A)
+	fmt.Printf("B: %v\n", *B)
+}
+
 func sa(A, B *stack) {
 	A.swap()
-	fmt.Println("sa")
+	fmt.Print("sa\\n")
+	printStacks(A, B)
 }
 
 func sb(A, B *stack) {
 	B.swap()
-	fmt.Println("sb")
+	fmt.Print("sb\\n")
+	printStacks(A, B)
 }
 
 func ss(A, B *stack) {
 	A.swap()
 	B.swap()
-	fmt.Println("ss")
+	fmt.Print("ss\\n")
+	printStacks(A, B)
 }
 
 func pa(A, B *stack) {
 	num, _ := B.pop()
 	*A = prepend(*A, num)
-	fmt.Println("pa")
+	fmt.Print("pa\\n")
+	printStacks(A, B)
 }
 
 func pb(A, B *stack) {
 	num, _ := A.pop()
 	*B = prepend(*B, num)
-	fmt.Println("pb")
+	fmt.Print("pb\\n")
+	printStacks(A, B)
 }
 
 func ra(A, B *stack) {
 	A.rotateUp()
-	fmt.Println("ra")
+	fmt.Print("ra\\n")
+	printStacks(A, B)
 }
 
 func rb(A, B *stack) {
 	B.rotateUp()
-	fmt.Println("rb")
+	fmt.Print("rb\\n")
+	printStacks(A, B)
 }
 
 func rr(A, B *stack) {
 	A.rotateUp()
 	B.rotateUp()
-	fmt.Println("rr")
+	fmt.Print("rr\\n")
+	printStacks(A, B)
 }
 
 func rra(A, B *stack) {
 	A.rotateDown()
-	fmt.Println("rra")
+	fmt.Print("rra\\n")
+	printStacks(A, B)
 }
 
 func rrb(A, B *stack) {
 	B.rotateDown()
-	fmt.Println("rrb")
+	fmt.Print("rrb\\n")
+	printStacks(A, B)
 }
 
 func rrr(A, B *stack) {
 	A.rotateDown()
 	B.rotateDown()
-	fmt.Println("rrr")
+	fmt.Print("rrr\\n")
+	printStacks(A, B)
 }
 
 func check(A, B *stack) bool {
