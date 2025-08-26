@@ -3,16 +3,23 @@ package main
 import (
 	"fmt"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
 
-//	type stack struct {
-//		curr []float32
-//		targetStack *stack
-//	}
-type stack []float64
+type stack struct {
+	val             int
+	currentPosition int
+	finalIndex      int
+	pushPrice       int
+	aboveMedian     bool
+	cheapest        bool
+	targetNode      *stack
+	next            *stack
+	prev            *stack
+}
+
+var checker bool
 
 func dupChecker() func(int) bool {
 	duplicate := map[int]bool{}
@@ -26,11 +33,15 @@ func dupChecker() func(int) bool {
 	}
 }
 
-func stackFromArgNums(argv []string) stack {
+func stackFromArgNums(stackA *stack, argv []string) {
 	isDup := dupChecker()
-	stackA := stack{}
+	// var stackA *stack
 	var smallest int
 	for _, str := range argv {
+		if str == "--checker" {
+			checker = true
+			continue
+		}
 		split := strings.Split(str, " ")
 		for _, x := range split {
 			num, err := strconv.Atoi(x)
@@ -45,10 +56,40 @@ func stackFromArgNums(argv []string) stack {
 				fmt.Println(num, "is duplicated, Error")
 				os.Exit(2)
 			}
-			stackA = append(stackA, float64(num))
+
+			appendNode(&stackA, num)
 		}
 	}
-	return stackA
+	// return stackA
+}
+
+func appendNode(s **stack, val int) {
+	if s == nil {
+		return
+	}
+	node := &stack{
+		val:  val,
+		next: nil,
+		prev: nil,
+	}
+	if *s == nil {
+		*s = node
+	} else {
+		last := findLastNode(*s)
+		last.next = node
+		node.prev = last
+	}
+}
+
+// Helper to find the last node in the stack
+func findLastNode(s *stack) *stack {
+	if s == nil {
+		return nil
+	}
+	for s.next != nil {
+		s = s.next
+	}
+	return s
 }
 
 type valueStack struct {
@@ -58,332 +99,455 @@ type sizeStack struct {
 	A, B *stack
 }
 
-func solve(A, B *stack) {
-	switch len(*A) {
-	case 4, 5:
-		four_Five(A, B)
-	case 3:
-		three(A, B)
-	case 2:
-		two(A, B)
-	default:
-		// Use plan-based selective pushes
-		maxPushes := min(len(*A)/3, 2)
-		pushed := 0
+func Init_nodes(a, b *stack) {
+	set_curr_position(a)
+	set_curr_position(b)
+	set_target_node(a, b)
+	set_price(a, b)
+	set_cheapest(b)
+}
 
-		for len(*A) > 3 && pushed < maxPushes {
-			bestCost := -1
-			bestIdxA := 0
-			maxConsider := min(len(*A), 4)
-			for idxA := 0; idxA < maxConsider; idxA++ {
-				x := (*A)[idxA]
-				idxB := findInsertIdxBDesc(*B, x)
-				p := BestPlan(len(*A), idxA, len(*B), idxB)
-				cost := planCost(p)
-				if bestCost == -1 || cost < bestCost {
-					bestCost = cost
-					bestIdxA = idxA
-				}
-			}
-			x := (*A)[bestIdxA]
-			idxB := findInsertIdxBDesc(*B, x)
-			plan := BestPlan(len(*A), bestIdxA, len(*B), idxB)
-			ExecutePlan(A, B, plan)
-			pb(A, B)
-			pushed++
-			MaybeSS(A, B)
+func set_price(a, b *stack) {
+	lenA := stack_len(a)
+	lenB := stack_len(b)
+	for nodeB := b; nodeB != nil; nodeB = nodeB.next {
+		nodeB.pushPrice = nodeB.currentPosition
+		if !nodeB.aboveMedian {
+			nodeB.pushPrice = lenB - nodeB.currentPosition
 		}
-
-		if len(*A) >= 4 && !(*A).isSorted() {
-			if len(*A) >= 2 && (*A)[0] > (*A)[1] {
-				ra(A, B)
+		if nodeB.targetNode != nil {
+			if nodeB.targetNode.aboveMedian {
+				nodeB.pushPrice += nodeB.targetNode.currentPosition
+			} else {
+				nodeB.pushPrice += lenA - nodeB.targetNode.currentPosition
 			}
 		}
-
-		// Solve remaining A
-		solve(A, B)
-		// Return all from B to A
-		for len(*B) > 0 {
-			pa(A, B)
-		}
 	}
 }
 
-// RotPlan captures how many times to call each rotation for the minimal-cost plan.
-type RotPlan struct {
-	rr, rrr int // overlapped rotations
-	ra, rra int // residual rotations on A
-	rb, rrb int // residual rotations on B
-}
-
-// rotationsToTop returns the number of up-rotations (ra/rb) and down-rotations (rra/rrb)
-// needed to bring index idx to the top in a stack of length n.
-func rotationsToTop(n, idx int) (up, down int) {
-	if n <= 0 || idx < 0 || idx >= n {
-		return 0, 0
-	}
-	up = idx
-	down = n - idx
-	return up, down
-}
-
-// planCost sums the total number of operations in a RotPlan.
-func planCost(p RotPlan) int {
-	return p.rr + p.rrr + p.ra + p.rra + p.rb + p.rrb
-}
-
-// BestPlan computes the minimal plan to bring A[idxA] and B[idxB] to the top,
-// exploiting rr/rrr where beneficial.
-func BestPlan(lenA, idxA, lenB, idxB int) RotPlan {
-	aUp, aDown := rotationsToTop(lenA, idxA)
-	bUp, bDown := rotationsToTop(lenB, idxB)
-
-	// Plan 1: both up (rr)
-	p1 := RotPlan{}
-	p1.rr = min(aUp, bUp)
-	p1.ra = aUp - p1.rr
-	p1.rb = bUp - p1.rr
-
-	// Plan 2: both down (rrr)
-	p2 := RotPlan{}
-	p2.rrr = min(aDown, bDown)
-	p2.rra = aDown - p2.rrr
-	p2.rrb = bDown - p2.rrr
-
-	// Plan 3: A up, B down
-	p3 := RotPlan{}
-	p3.ra = aUp
-	p3.rrb = bDown
-
-	// Plan 4: A down, B up
-	p4 := RotPlan{}
-	p4.rra = aDown
-	p4.rb = bUp
-
-	// Choose the cheapest plan
-	best := p1
-	bestCost := planCost(p1)
-
-	if c := planCost(p2); c < bestCost {
-		best, bestCost = p2, c
-	}
-	if c := planCost(p3); c < bestCost {
-		best, bestCost = p3, c
-	}
-	if c := planCost(p4); c < bestCost {
-		best, bestCost = p4, c
-	}
-	return best
-}
-
-// ExecutePlan applies the plan using your primitive ops.
-// After this, A[idxA] and B[idxB] will be at the top (if idxB was valid for lenB > 0).
-// You typically follow with pb/pa as intended.
-func ExecutePlan(A, B *stack, p RotPlan) {
-	for i := 0; i < p.rr; i++ {
-		rr(A, B)
-	}
-	for i := 0; i < p.rrr; i++ {
-		rrr(A, B)
-	}
-	for i := 0; i < p.ra; i++ {
-		ra(A, B)
-	}
-	for i := 0; i < p.rra; i++ {
-		rra(A, B)
-	}
-	for i := 0; i < p.rb; i++ {
-		rb(A, B)
-	}
-	for i := 0; i < p.rrb; i++ {
-		rrb(A, B)
-	}
-}
-
-// MaybeSS tries to use ss when both stacks benefit. Otherwise performs needed single swaps.
-// - For A (ascending target): swap if A[0] > A[1].
-// - For B (descending maintenance): swap if B[0] < B[1].
-func MaybeSS(A, B *stack) {
-	doA := len(*A) >= 2 && (*A)[0] > (*A)[1]
-	doB := len(*B) >= 2 && (*B)[0] < (*B)[1]
-
-	switch {
-	case doA && doB:
-		ss(A, B)
-	case doA:
-		sa(A, B)
-	case doB:
-		sb(A, B)
-	}
-}
-
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
-// getPivots возвращает два порога: ~33% и ~66% перцентили.
-func getPivots(a stack) (p1, p2 float64) {
-	n := len(a)
-	if n == 0 {
-		return 0, 0
-	}
-	cp := make([]float64, n)
-	copy(cp, a)
-	sort.Float64s(cp)
-	p1 = cp[n/3]
-	p2 = cp[(2*n)/3] // 33% и 66% перцентили
-	if p1 > p2 {
-		p1, p2 = p2, p1
-	}
-	return
-}
-
-// indexOfMax возвращает индекс максимального элемента стека.
-func indexOfMax(b stack) int {
-	if len(b) == 0 {
-		return 0
-	}
-	maxIdx := 0
-	for i := 1; i < len(b); i++ {
-		if b[i] > b[maxIdx] {
-			maxIdx = i
-		}
-	}
-	return maxIdx
-}
-
-// rotateBToTop крутит только B, чтобы b[idx] оказался на вершине.
-func rotateBToTop(A, B *stack, idx int) {
-	n := len(*B)
-	if n == 0 || idx < 0 || idx >= n {
+func set_cheapest(b *stack) {
+	if b == nil {
 		return
 	}
-	if idx <= n/2 {
-		for i := 0; i < idx; i++ {
-			rb(A, B)
+	bestMatchValue := int(^uint(0) >> 1) // Max int
+	var bestMatchNode *stack
+
+	for node := b; node != nil; node = node.next {
+		node.cheapest = false // reset
+		if node.pushPrice < bestMatchValue {
+			bestMatchValue = node.pushPrice
+			bestMatchNode = node
+		}
+	}
+	if bestMatchNode != nil {
+		bestMatchNode.cheapest = true
+	}
+}
+
+func set_curr_position(s *stack) {
+	if s == nil {
+		return
+	}
+	// Find length
+	length := 0
+	for node := s; node != nil; node = node.next {
+		length++
+	}
+	centerline := length / 2
+
+	i := 0
+	for node := s; node != nil; node = node.next {
+		node.currentPosition = i
+		if i <= centerline {
+			node.aboveMedian = true
+		} else {
+			node.aboveMedian = false
+		}
+		i++
+	}
+}
+
+func (s *stack) isEmpty() bool {
+	return s == nil
+}
+
+func (s *stack) isSorted() bool {
+	if s == nil || s.next == nil {
+		return true
+	}
+	for node := s; node.next != nil; node = node.next {
+		if node.val > node.next.val {
+			return false
+		}
+	}
+	return true
+}
+
+func (s *stack) peekIndex() int {
+	if s == nil {
+		return -1
+	}
+	return s.currentPosition
+}
+
+func find_smallest(s *stack) *stack {
+	if s == nil {
+		return nil
+	}
+	smallest := s
+	for node := s; node != nil; node = node.next {
+		if node.val < smallest.val {
+			smallest = node
+		}
+	}
+	return smallest
+}
+
+func set_target_node(a, b *stack) {
+	for nodeB := b; nodeB != nil; nodeB = nodeB.next {
+		var targetNode *stack
+		bestMatchVal := int(^uint(0) >> 1) // Max int
+
+		for nodeA := a; nodeA != nil; nodeA = nodeA.next {
+			if nodeA.val > nodeB.val && nodeA.val < bestMatchVal {
+				bestMatchVal = nodeA.val
+				targetNode = nodeA
+			}
+		}
+
+		if targetNode == nil {
+			nodeB.targetNode = find_smallest(a)
+		} else {
+			nodeB.targetNode = targetNode
+		}
+	}
+}
+
+func tiny_sort(a **stack) {
+	highestNode := find_highest(*a)
+	if *a == highestNode {
+		ra(a, false)
+	} else if (*a).next == highestNode {
+		rra(a, false)
+	}
+	if (*a).val > (*a).next.val {
+		sa(a, false)
+	}
+}
+
+func find_highest(s *stack) *stack {
+	if s == nil {
+		return nil
+	}
+	highest := s
+	for node := s; node != nil; node = node.next {
+		if node.val > highest.val {
+			highest = node
+		}
+	}
+	return highest
+}
+
+func finish_rotation(stack **stack, topNode *stack, stackName rune) {
+	for *stack != topNode {
+		if stackName == 'a' {
+			if topNode.aboveMedian {
+				ra(stack, false)
+			} else {
+				rra(stack, false)
+			}
+		} else if stackName == 'b' {
+			if topNode.aboveMedian {
+				rb(stack, false)
+			} else {
+				rrb(stack, false)
+			}
+		}
+	}
+}
+
+func handle_five(a, b **stack) {
+	for stack_len(*a) > 3 {
+		Init_nodes(*a, *b)
+		finish_rotation(a, find_smallest(*a), 'a')
+		pb(b, a, false)
+	}
+}
+
+// Helper function to get the length of the stack
+func stack_len(s *stack) int {
+	length := 0
+	for node := s; node != nil; node = node.next {
+		length++
+	}
+	return length
+}
+
+func return_cheapest(s *stack) *stack {
+	if s == nil {
+		return nil
+	}
+	for node := s; node != nil; node = node.next {
+		if node.cheapest {
+			return node
+		}
+	}
+	return nil
+}
+
+func rotate_both(a, b **stack, cheapest *stack) {
+	for *b != cheapest && *a != cheapest.targetNode {
+		rr(a, b, false)
+	}
+	set_curr_position(*a)
+	set_curr_position(*b)
+}
+
+func reverse_rotate_both(a, b **stack, cheapest *stack) {
+	for *b != cheapest && *a != cheapest.targetNode {
+		rrr(a, b, false)
+	}
+	set_curr_position(*a)
+	set_curr_position(*b)
+}
+
+func Move_nodes(a, b **stack) {
+	cheapest := return_cheapest(*b)
+	if cheapest == nil {
+		return
+	}
+	if cheapest.aboveMedian && cheapest.targetNode.aboveMedian {
+		rotate_both(a, b, cheapest)
+	} else if !cheapest.aboveMedian && !cheapest.targetNode.aboveMedian {
+		reverse_rotate_both(a, b, cheapest)
+	}
+	finish_rotation(b, cheapest, 'b')
+	finish_rotation(a, cheapest.targetNode, 'a')
+	pa(a, b, false)
+}
+
+func push_sw(a, b **stack) {
+	lenA := stack_len(*a)
+	if lenA == 5 {
+		handle_five(a, b)
+	} else {
+		for i := 0; i < lenA-3; i++ {
+			pb(b, a, false)
+		}
+	}
+
+	tiny_sort(a)
+
+	for *b != nil {
+		Init_nodes(*a, *b)
+		Move_nodes(a, b)
+	}
+
+	set_curr_position(*a)
+	smallest := find_smallest(*a)
+	if smallest != nil && smallest.aboveMedian {
+		for *a != smallest {
+			ra(a, checker)
 		}
 	} else {
-		for i := 0; i < n-idx; i++ {
-			rrb(A, B)
+		for *a != smallest {
+			rra(a, checker)
 		}
 	}
 }
 
-func pushAlot(A, B *stack, amount int) {
-	for amount > 0 { // Sorted then the left over? random? // argest set then random?
-		pb(A, B)
-		amount--
+// SECTION move
+
+func Push(dest **stack, src **stack) {
+	if *src == nil {
+		return
+	}
+	nodeToPush := *src
+	*src = (*src).next
+	if *src != nil {
+		(*src).prev = nil
+	}
+	nodeToPush.prev = nil
+	if *dest == nil {
+		*dest = nodeToPush
+		nodeToPush.next = nil
+	} else {
+		nodeToPush.next = *dest
+		(*dest).prev = nodeToPush
+		*dest = nodeToPush
 	}
 }
 
-func pushAlotRev(A, B *stack, amount int) {
-	for amount > 0 { // Sorted then the left over? random? // argest set then random?
-		rra(A, B)
-		pb(A, B)
-		amount--
+func pa(a **stack, b **stack, checker bool) {
+	Push(a, b)
+	if !checker {
+		print("pa\n")
 	}
 }
 
-const (
-	right bool = true
-	left  bool = false
-)
-
-// // findInsertIdxBDesc возвращает индекс в B, который нужно поднять на верх,
-// // чтобы после pb элемент из A оказался на вершине B и B оставался по убыванию.
-// // Линейная проверка по «круговой» паре prev->curr; если подходящей щели нет,
-// // вставляем после максимума.
-func findInsertIdxBDesc(b stack, x float64) int {
-	n := len(b)
-	if n == 0 {
-		return 0
+func pb(b **stack, a **stack, checker bool) {
+	Push(b, a)
+	if !checker {
+		print("pb\n")
 	}
-	maxIdx := 0
-	for i := 1; i < n; i++ {
-		if b[i] > b[maxIdx] {
-			maxIdx = i
-		}
-	}
-	// Ищем позицию i, куда x «вписывается» между prev и curr: prev >= x >= curr
-	for i := 0; i < n; i++ {
-		prev := b[(i-1+n)%n]
-		curr := b[i]
-		if prev >= x && x >= curr {
-			return i
-		}
-	}
-	// x либо больше max, либо меньше min — вставляем после максимума
-	return (maxIdx + 1) % n
 }
 
-// canSolveSmall checks if a small stack (3 or fewer elements) can be sorted efficiently
-func canSolveSmall(a stack) bool {
-	return len(a) <= 3
+// SECTION reverse_rotate
+// reverseRotate moves the last element of the stack to the front.
+func reverseRotate(head **stack) {
+	if head == nil || *head == nil || (*head).next == nil {
+		return
+	}
+	last := findLastNode(*head)
+	if last == nil || last.prev == nil {
+		return
+	}
+	// Detach last node
+	last.prev.next = nil
+	last.prev = nil
+	// Move last to front
+	last.next = *head
+	(*head).prev = last
+	*head = last
+}
+
+// rra reverses stack a.
+func rra(a **stack, checker bool) {
+	reverseRotate(a)
+	if !checker {
+		fmt.Println("rra")
+	}
+}
+
+// rrb reverses stack b.
+func rrb(b **stack, checker bool) {
+	reverseRotate(b)
+	if !checker {
+		fmt.Println("rrb")
+	}
+}
+
+// rrr reverses both stacks a and b.
+func rrr(a, b **stack, checker bool) {
+	reverseRotate(a)
+	reverseRotate(b)
+	if !checker {
+		fmt.Println("rrr")
+	}
+}
+
+// SECTION rotate
+// rotate moves the first element of the stack to the end.
+func rotate(head **stack) {
+	if head == nil || *head == nil || (*head).next == nil {
+		return
+	}
+	first := *head
+	last := findLastNode(*head)
+
+	*head = first.next
+	(*head).prev = nil
+
+	last.next = first
+	first.prev = last
+	first.next = nil
+}
+
+// ra rotates stack a.
+func ra(a **stack, checker bool) {
+	rotate(a)
+	if !checker {
+		fmt.Println("ra")
+	}
+}
+
+// rb rotates stack b.
+func rb(b **stack, checker bool) {
+	rotate(b)
+	if !checker {
+		fmt.Println("rb")
+	}
+}
+
+// rr rotates both stacks a and b.
+func rr(a, b **stack, checker bool) {
+	rotate(a)
+	rotate(b)
+	if !checker {
+		fmt.Println("rr")
+	}
+}
+
+// SECTION swap
+// swap swaps the first two elements of the stack.
+func swap(head **stack) {
+	if head == nil || *head == nil || (*head).next == nil {
+		return
+	}
+	first := *head
+	second := first.next
+
+	// Adjust pointers to swap first and second nodes
+	first.next = second.next
+	if second.next != nil {
+		second.next.prev = first
+	}
+	second.prev = nil
+	second.next = first
+	first.prev = second
+
+	*head = second
+}
+
+// sa swaps the first two elements of stack a.
+func sa(a **stack, checker bool) {
+	swap(a)
+	if !checker {
+		fmt.Println("sa")
+	}
+}
+
+// sb swaps the first two elements of stack b.
+func sb(b **stack, checker bool) {
+	swap(b)
+	if !checker {
+		fmt.Println("sb")
+	}
+}
+
+// ss swaps the first two elements of both stacks a and b.
+func ss(a, b **stack, checker bool) {
+	swap(a)
+	swap(b)
+	if !checker {
+		fmt.Println("ss")
+	}
+}
+
+func printNode(s *stack) {
+	for node := s; node != nil; node = node.next {
+		fmt.Printf("val: %d, currPos: %d, finalIdx: %d, pushPrice: %d, aboveMedian: %v, cheapest: %v\n",
+			node.val, node.currentPosition, node.finalIndex, node.pushPrice, node.aboveMedian, node.cheapest)
+	}
 }
 
 func main() {
 	if len(os.Args) == 1 {
 		os.Exit(2)
 	}
-	stackA := stackFromArgNums(os.Args[1:])
-	stackB := stack{}
-
-	// Special handling for small stacks
-	if len(stackA) <= 3 {
-		solve(&stackA, &stackB)
-		return
-	}
-
-	// For the optimal strategy: be more selective about pushes
-	maxPushes := min(len(stackA)/3, 2) // Push at most 2 elements for most cases
-	pushed := 0
-
-	for len(stackA) > 3 && pushed < maxPushes {
-		bestCost := -1
-		bestIdxA := 0
-
-		// Only consider the first few elements for pushing (more selective)
-		maxConsider := min(len(stackA), 4)
-		for idxA := 0; idxA < maxConsider; idxA++ {
-			x := stackA[idxA]
-			idxB := findInsertIdxBDesc(stackB, x)
-			p := BestPlan(len(stackA), idxA, len(stackB), idxB)
-			cost := planCost(p)
-			if bestCost == -1 || cost < bestCost {
-				bestCost = cost
-				bestIdxA = idxA
-			}
-		}
-
-		// Execute the best plan
-		x := stackA[bestIdxA]
-		idxB := findInsertIdxBDesc(stackB, x)
-		plan := BestPlan(len(stackA), bestIdxA, len(stackB), idxB)
-		ExecutePlan(&stackA, &stackB, plan)
-		pb(&stackA, &stackB)
-		pushed++
-
-		// Try to optimize with swaps after each push
-		MaybeSS(&stackA, &stackB)
-	}
-
-	if len(stackA) >= 4 && !stackA.isSorted() {
-		// Check if ra would help improve the order
-		if len(stackA) >= 2 && stackA[0] > stackA[1] {
-			// Try ra to see if it improves things
-			ra(&stackA, &stackB)
+	var stackA *stack
+	stackFromArgNums(stackA, os.Args[1:])
+	var stackB *stack
+	printNode(stackA)
+	if !stackA.isSorted() {
+		if stack_len(stackA) == 2 {
+			sa(&stackA, checker)
+		} else if stack_len(stackA) == 3 {
+			tiny_sort(&stackA)
+		} else {
+			push_sw(&stackA, &stackB)
+			// push_swap(&stackA, &stackB) --- IGNORE ---
 		}
 	}
-	// Solve remaining A (should be mostly sorted now)
-	solve(&stackA, &stackB)
-
-	// Return all elements from B to A
-	for len(stackB) > 0 {
-		pa(&stackA, &stackB)
-	}
-
-	fmt.Println(stackA)
+	printNode(stackA)
 }
